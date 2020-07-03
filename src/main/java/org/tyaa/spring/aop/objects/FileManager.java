@@ -19,21 +19,15 @@ public class FileManager implements Manager {
 	@ShowResult
 	public Set<String> getExtensionList(String folder) {
 		File dir = new File(folder);
-
 		Set<String> extList = new TreeSet<>();
-
-		for (String fileName : dir.list()) {
-
-			File file = new File(dir.getAbsolutePath() + "\\" + fileName);
-
+		for (File file : dir.listFiles()) {
+			String fileName = file.getName();
 			int i = fileName.lastIndexOf(".");
 			if (file.isFile() && i != -1) {
-				extList.add(fileName.substring(i + 1, fileName.length()).toLowerCase());
+				extList.add(fileName.substring(i + 1).toLowerCase());
 			}
 		}
-
 		return extList;
-
 	}
 
 	@Override
